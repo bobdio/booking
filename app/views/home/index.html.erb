@@ -1,1 +1,13 @@
-<div class='container'><h1><%= @home[:description] %></h1></div>
+<% tmp = @home[:description] %>
+<% count = tmp.length %>
+<article class="row">
+  <div class="span4">
+    <%= tmp[0..count/3] %>
+  </div>
+  <div class="span4">
+    <%= tmp[count/3..2*count/3] %>
+  </div>
+  <div class="span4">
+    <%= tmp[2*count/3..count-1] %>
+  </div>
+</article>
