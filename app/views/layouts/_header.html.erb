@@ -9,10 +9,10 @@
       <div class="pull-right">
       	<nav>
       		<ul class="nav">
-      			<li><a href="#"><span class="icon-home"></span> Головна</a></li>
+      			<li><a href= "<%= root_path %>"><span class="icon-home"></span> Home</a></li>
       			<li class="divider-vertical"></li>
-      			<li><a href="#">Реєстрація</a></li>
-      			<li><a href="#">Вхід</a></li>
+      			<li><%= link_to "Sign Up", signup_path %></li>
+      			<li><%= link_to "Sign in", signin_path %></a></li>
       		</ul>
       	</nav>
       </div>

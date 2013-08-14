@@ -1,0 +1,17 @@
+<% @title = "Sign in" %>
+<div class="span4">
+  <div class="caption"><%= @title %></div>
+  <%= form_for(:session, url: sessions_path) do |f| %>
+    
+    <%= render 'shared/error_messages', obj: f.object %>
+    
+    <%= f.label :email, "E-mail" %>
+    <%= f.email_field :email %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+
+    <%= f.submit @title, class: "btn btn-large btn-primary" %> 
+  <% end %> 
+</div>
