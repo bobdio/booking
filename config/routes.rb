@@ -1,11 +1,11 @@
 Booking::Application.routes.draw do
 
-  resources :users
+  resources :users , only: [:new, :create]
   resources :sessions #, only: [:new, :create]
   
-  match "/signup", to: "users#new"
+  get "/signup", to: "users#new"
 
-  match "/signin", to: "sessions#new"
+  get "/signin", to: "sessions#new"
 
   root :to => 'home#index'
 
