@@ -1,4 +1,4 @@
-<% @title = "Sign up" %>
+<% @title = "Edit user" %>
 <div class="span4">
   <div class="caption"><%= @title %></div>
   <%= form_for(@user) do |f| %>
@@ -7,6 +7,6 @@
     
     <%= render 'fields', f: f %>
 
-    <%= f.submit "Create my account", class: "btn btn-large btn-primary" %> 
+    <%= f.submit "Save changes", class: "btn btn-large btn-primary" %> 
   <% end %> 
 </div>

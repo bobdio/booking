@@ -1,6 +1,6 @@
 Booking::Application.routes.draw do
 
-  resources :users , only: [:new, :create]
+  resources :users #, only: [:index, :new, :create, :edit, :destroy]
   resources :sessions #, only: [:new, :create]
   
   get "/signup", to: "users#new"
