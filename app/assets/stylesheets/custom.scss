@@ -58,7 +58,13 @@ p {
   font-weight: bold;
   color: #0088CC;
 }
-
+.calendar-caption{
+  font-size:1.5em;
+  line-height: 2em;
+  text-align:left;
+  font-weight: bold;
+  color: #0088CC;
+}
 /* form data */
 
 input, textarea, select, .uneditable-input {
@@ -94,4 +100,24 @@ footer{
 */
 .user-table thead th{
   text-align:center;  
+}
+
+#calendar {
+  margin-bottom: 50px;
+}
+.enter-booking{
+  width: 60%;
+  float:left;
+  font-size:12px;
+  a{
+    text-decoration:underline;
+    padding-left:10px;
+  } 
+}
+.ui-widget-content{
+  .enter-booking{
+    a{
+      color: #0088CC;
+    }
+  }
 }

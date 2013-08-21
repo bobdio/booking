@@ -1,0 +1,13 @@
+<div class="caption">New booking</div>
+<div class="span4">
+	<%= form_for(@book) do |f| %>
+    <%= render 'shared/error_messages', obj: f.object %>  
+   
+    <%= render 'fields', f: f %>	
+
+	  <%= f.submit "booking", class: "btn btn-large btn-primary" %>
+	<% end %>
+	<div>
+    <%= link_to 'Back', :back %>
+  </div> 
+</div>

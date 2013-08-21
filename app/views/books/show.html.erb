@@ -1,0 +1,38 @@
+<script>
+	$(document).ready(function() {
+	
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		
+		var calendar = $('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			theme: true,
+			user_id: <%= @user.id%>,
+			events: [
+        <% @books.each do |book| %>
+          {
+            id: <%= book[:id] %>,
+            title: "<%= event_title(User.find book[:client_id]) %>",
+            start:new Date("<%= rb_to_js(book[:from]) %>"),
+            end: new Date("<%= rb_to_js(book[:to]) %>"), 
+            url: "/books/edit/<%= book[:id] %>", 
+            allDay: false
+          },
+        <% end %>	
+			],
+			timeFormat: {
+				'': 'H:mm{ - H:mm}'
+			}
+		});
+		
+	});
+
+</script>
+<div class="calendar-caption"><%= "#{@user.name} #{@user.lastname}" %></div>
+<div id='calendar'></div>
