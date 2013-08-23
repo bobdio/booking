@@ -1,0 +1,9 @@
+<% @title= "#{@user.name} #{@user.lastname}"%>
+<div class="row">
+  <aside class="span4">
+    <section>
+        <%= gravatar_for @user %>
+        <%= "#{@user.name} #{@user.lastname}" %>
+    </section> 
+  </aside>
+</div>

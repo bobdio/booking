@@ -19,6 +19,8 @@ var defaults = {
 
   // additional option to display a link to booking
   user_id: 1, 
+  signin_user: false,
+  auth_token: '',
 	// display
 	defaultView: 'month',
 	aspectRatio: 1.35,
@@ -2383,12 +2385,13 @@ function BasicView(element, calendar, viewName) {
 			">" +
 			"<div>";
 		// additionaly
-		if(date >= today){
+		if(date >= today && opt("signin_user")){
 			html += "<div class='enter-booking'><form action='/books/new'" + 
 				" method='post'>" + 
+				"<input type='hidden' name='authenticity_token' value='"+ opt('auth_token') +"'>" +
 				"<input type='hidden' name='user_id' value='" + opt("user_id") +"' />"+
 				"<input type='hidden' name='date' value='" + formatDate(date, 'yyyy-MM-dd') + "'/>"+
-				"<input type='submit' value='booking' class='btn-mini btn-primary' />" +
+				"<input type='submit' value='booking' class='btn btn-mini btn-primary' />" +
 				"</form></div>";
 		}	
     // end additionaly

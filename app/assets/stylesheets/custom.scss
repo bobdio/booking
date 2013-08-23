@@ -1,6 +1,6 @@
 @import 'bootstrap';
 html {
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
 }
 
 
@@ -119,5 +119,15 @@ footer{
     a{
       color: #0088CC;
     }
+  }
+}
+
+/*
+* styles for user list
+*/
+.user-list{
+  list-style:none;
+  li{
+    margin-top:10px;
   }
 }

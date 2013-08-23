@@ -14,6 +14,10 @@
 			},
 			theme: true,
 			user_id: <%= @user.id%>,
+      <% if user_signed_in? %>
+			  signin_user: true,
+			  auth_token: '<%= form_authenticity_token %>',
+			<% end %>
 			events: [
         <% @books.each do |book| %>
           {
@@ -21,7 +25,9 @@
             title: "<%= event_title(User.find book[:client_id]) %>",
             start:new Date("<%= rb_to_js(book[:from]) %>"),
             end: new Date("<%= rb_to_js(book[:to]) %>"), 
-            url: "/books/edit/<%= book[:id] %>", 
+            <% if user_signed_in? && current_user.id == book[:client_id] %>
+              url: "/books/edit/<%= book[:id] %>", 
+            <% end %>
             allDay: false
           },
         <% end %>	
@@ -32,7 +38,10 @@
 		});
 		
 	});
-
 </script>
+<% @title = "Booking #{@user.name} #{@user.lastname}" %>
+<% unless user_signed_in? %>
+ <div class="success alert alert-notice">You need to sign in or sign up before booking.</div>
+<% end %>
 <div class="calendar-caption"><%= "#{@user.name} #{@user.lastname}" %></div>
 <div id='calendar'></div>

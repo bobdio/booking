@@ -1,16 +1,11 @@
 Booking::Application.routes.draw do
 
-  resources :users #, only: [:index, :new, :create, :edit, :destroy]
-  resources :sessions #, only: [:new, :create]
-  resources :books #, only: [:index, :new, :create, :show]
+  devise_for :users
+  resources :users , only: [:index, :show]
+  resources :books 
   
   post "/books/new", to: "books#new"
   get "/books/edit/:id", to: "books#edit"
-
-
-  get "/signup", to: "users#new"
-
-  get "/signin", to: "sessions#new"
 
   root :to => 'home#index'
 

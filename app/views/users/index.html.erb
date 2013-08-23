@@ -1,20 +1,12 @@
+<% @title= "Users"%>
 <div class="caption">Users</div>
-<div><%= link_to "Add new user", signup_path %></div>
+<div><%= link_to "Add new user", new_user_session_path %></div>
 <br/>
-<table class="table table-bordered table-hover user-table">
-  <thead>
-  	<th>Name</th>
-  	<th>Email</th>
-  	<th colspan="2">actions</th>
-  </thead>
-  <tbody>
+<ul class='user-list'>
 	  <% @users.each do |user| %>
-	    <tr>
-	      <td><%= link_to "#{user.name} #{user.lastname}", controller: "books", action: "show", id: user.id %></td>
-	      <td><%= user.email %></td>
-	      <td><%= link_to "edit", edit_user_path(user) %></td>
-	      <td><%= link_to "delete", user, method: :delete, data: {confirm: "You sure?"} %></td>
-	    </tr>
+	    <li>
+	      <%= link_to gravatar_for(user), controller: "books", action: "show", id: user.id %>
+	      <%= link_to "#{user.name} #{user.lastname}", controller: "books", action: "show", id: user.id %>
+	    </li>
 	  <% end %>
-  </tbody>
-</table>
+</ul>
