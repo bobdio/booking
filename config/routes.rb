@@ -6,6 +6,7 @@ Booking::Application.routes.draw do
   
   post "/books/new", to: "books#new"
   get "/books/edit/:id", to: "books#edit"
+  get "/booking/:id", to: "books#booking"
 
   root :to => 'home#index'
 

@@ -1,12 +1,15 @@
 <% @title= "Users"%>
 <div class="caption">Users</div>
-<div><%= link_to "Add new user", new_user_session_path %></div>
+<div class="span6">
+<% if can? :manage, User %>
+<div><%= link_to "Add new user", new_user_registration_path %></div>
+<% end %>
 <br/>
 <ul class='user-list'>
 	  <% @users.each do |user| %>
 	    <li>
-	      <%= link_to gravatar_for(user), controller: "books", action: "show", id: user.id %>
-	      <%= link_to "#{user.name} #{user.lastname}", controller: "books", action: "show", id: user.id %>
+	      <%= link_to gravatar_for(user), controller: "books", action: "booking", id: user.id %>
+	      <%= link_to "#{user.name} #{user.lastname}", controller: "books", action: "booking", id: user.id %>
 	    </li>
 	  <% end %>
 </ul>
