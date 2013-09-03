@@ -21,6 +21,7 @@ var defaults = {
   user_id: 1, 
   signin_user: false,
   auth_token: '',
+  form_url: '',
 	// display
 	defaultView: 'month',
 	aspectRatio: 1.35,
@@ -2386,7 +2387,7 @@ function BasicView(element, calendar, viewName) {
 			"<div>";
 		// additionaly
 		if(date >= today && opt("signin_user")){
-			html += "<div class='enter-booking'><form action='/books/new'" + 
+			html += "<div class='enter-booking'><form action='"+ opt('form_url')+ "'" + 
 				" method='post'>" + 
 				"<input type='hidden' name='authenticity_token' value='"+ opt('auth_token') +"'>" +
 				"<input type='hidden' name='user_id' value='" + opt("user_id") +"' />"+

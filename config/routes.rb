@@ -1,12 +1,12 @@
-Booking::Application.routes.draw do
+Reservation::Application.routes.draw do
 
   devise_for :users
-  resources :users , only: [:index, :show]
-  resources :books 
+  resources :users , only: [:index, :show] do
+    resources :bookings #, only: :index
+  end
   
-  post "/books/new", to: "books#new"
-  get "/books/edit/:id", to: "books#edit"
-  get "/booking/:id", to: "books#booking"
+  post '/users/:user_id/bookings/new', to: "bookings#new"
+  #put '/users/:user_id/bookings/:id', to: "bookings#update"
 
   root :to => 'home#index'
 
