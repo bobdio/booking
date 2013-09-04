@@ -6,7 +6,7 @@
    
     <%= render 'fields', f: f %>	
     <div class="pull-right">
-      <%=  link_to "delete booking", @book, method: :delete, data: {confirm: "You sure?"} %>
+      <%=  link_to "delete booking",user_bookings_path(@user, @booking), method: :delete, data: {confirm: "You sure?"} %>
     </div>
 	  <%= f.submit "save changes", class: "btn btn-large btn-primary" %>
 	<% end %>
