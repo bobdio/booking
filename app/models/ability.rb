@@ -24,7 +24,6 @@ class Ability
   end	
 
   def not_logged_in
-    can [:login, :login_form, :activate_form, :activate], User
     can :read, :all
   end
 end

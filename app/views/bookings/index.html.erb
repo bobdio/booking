@@ -29,7 +29,8 @@
             <% if user_signed_in? && current_user.id == book[:client_id] %>
               url: "<%= edit_user_booking_path(@user,book) %>", 
             <% end %>
-            allDay: false
+            allDay: false,
+            color: '#2779AA' 
           },
         <% end %>	
 			],
