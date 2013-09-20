@@ -128,8 +128,20 @@ footer{
 * styles for user list
 */
 .user-list{
-  list-style:none;
-  li{
-    margin-top:10px;
+  li {
+    list-style:none;
+  }
+  td{
+    padding:10px;
+  }  
+  .confirm-client a{
+    color: #468847;
+  }
+  .block-client a{
+    color: #C09853;
+  }
+  .remove-client a{
+    color: red;
   }
 }
+

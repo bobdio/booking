@@ -4,12 +4,15 @@ Reservation::Application.routes.draw do
   resources :users , only: [:index, :show] do
     resources :bookings 
   end
-  
+  resources :relationships #, only: [:new, :create, :show]
   post '/users/:user_id/bookings/new', to: "bookings#new"
   put '/users/:user_id/bookings.:id', to: "bookings#update"
   delete '/users/:user_id/bookings.:id', to: "bookings#destroy"
+  
+  get 'relationships_confirm_client/:id', to: 'relationships#confirm_client'
+  get 'relationships_block_client/:id', to: 'relationships#block_client'
 
-  root :to => 'home#index'
+  root :to => 'users#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

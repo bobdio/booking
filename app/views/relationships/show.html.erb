@@ -1,0 +1,27 @@
+<% @title= @user.role == "user" ? "My clients" : "My personnel"%>
+<div class="caption"><%= @title%></div>
+<div class="span6">
+<br/>
+<table class='user-list'>
+	  <% list =  @user.role == "user" ? @user.clients : @user.inverse_clients %>
+	  <% list.each do |user| %>
+	    <tr>
+	      <td>
+	        <%= link_to gravatar_for(user), user_path(user) %>
+	        <%= link_to "#{user.name} #{user.lastname}", user_path(user) %>
+        </td>
+	      <% if @user.role == "user"  %>
+	        <td>
+	          <% unless @user.confirm_client? user.id%>
+	            <span class="confirm-client"><%= link_to "confirm", controller: 'relationships', action: 'confirm_client', id: user.id %></span>
+	          <% end %>      
+	        </td>
+	        <td>
+	          <% if @user.confirm_client? user.id %>  
+	            <span class="block-client"><%= link_to "block", controller: 'relationships', action: 'block_client', id: user.id %></span>    
+	          <% end %>
+	        </td>
+	      <% end %>  
+	    </tr>
+	  <% end %>
+</table>

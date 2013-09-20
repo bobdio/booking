@@ -4,7 +4,9 @@ class BookingsController < ApplicationController
   load_and_authorize_resource
   def index
   	@user = User.find params[:user_id]
-  	@books = @user.bookings 
+  	@books = @user.bookings
+  	@relation = Relationship.new
+  	@relation.user_id = @user.id 
   end
 
   def new 
@@ -37,7 +39,6 @@ class BookingsController < ApplicationController
   def update
   	@user = User.find params[:user_id]
   	@booking = @user.bookings.find params[:id]
-    #params[:booking][:client_id] = current_user.id
   	if @booking.update_attributes(params[:booking])
       flash[:success] = "Сhanges have been successfully saved! :-)"
       redirect_to user_bookings_path(@user)

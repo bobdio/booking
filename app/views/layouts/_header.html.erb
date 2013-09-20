@@ -11,7 +11,7 @@
       		<ul class="nav">
       			<li><a href= "<%= root_path %>"><span class="icon-home"></span> Home</a></li>
       			<li class="divider-vertical"></li>
-            <li><%= link_to "Users", users_path %></li>
+            <li><%= link_to "Personnel", users_path %></li>
       			<% unless signed_in? %>
               <li><%= link_to "Sign up", new_user_registration_path %></li>
               <li><%= link_to "Sign in", new_user_session_path %></li>
@@ -21,6 +21,12 @@
                   Account <b class="caret"></b> 
                 </a>
                 <ul class="dropdown-menu">
+                  <% if current_user.role == "user" %>
+                    <li><%= link_to "My clients", relationship_path(current_user) %></li>
+                  <% end %>
+                  <% if current_user.role == "client" %>
+                    <li><%= link_to "My personnel", relationship_path(current_user) %></li>
+                  <% end %>  
                   <li><%= link_to "Profile", current_user %></li>
                   <li><%= link_to "Settings", 
                           edit_user_registration_path(current_user) %></li>

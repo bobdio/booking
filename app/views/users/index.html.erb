@@ -1,5 +1,5 @@
-<% @title= "Users"%>
-<div class="caption">Users</div>
+<% @title= "Personnel"%>
+<div class="caption"><%= @title%></div>
 <div class="span6">
 <% if can? :manage, User %>
 <div><%= link_to "Add new user", new_user_registration_path %></div>

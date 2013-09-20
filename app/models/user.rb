@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-
-  ROLES = %w[admin client user]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -8,9 +6,34 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable 
   
   has_many :bookings, dependent: :destroy
-
-  #has_many :users, through: bookings
-  #has_many :users, through: bookings
-
   
+  has_many :relationships
+  has_many :clients, through: :relationships
+
+  has_many :inverse_relationships, class_name: "Relationship", foreign_key: "client_id"
+  has_many :inverse_clients, through: :inverse_relationships, source: :user
+  
+  def confirm_client?(client_id)
+    res = relationships.select(:confirm).where(client_id: client_id).first
+    return true if res && res.confirm == 1
+    false
+  end
+
+  def confirm_client(client_id)
+    res = relationships.where(client_id: client_id).first
+    res.confirm = 1
+    if res.save
+      return true
+    end  
+    false  
+  end
+  
+  def block_client(client_id)
+    res = relationships.where(client_id: client_id).first
+    res.confirm = 0
+    if res.save
+      return true
+    end  
+    false  
+  end
 end

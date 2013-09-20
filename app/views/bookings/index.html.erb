@@ -14,7 +14,7 @@
 			},
 			theme: true,
 			user_id: <%= @user.id%>,
-      <% if user_signed_in? %>
+      <% if user_signed_in? && ( @user.confirm_client? current_user.id )%>
 			  signin_user: true,
 			  auth_token: '<%= form_authenticity_token %>',
 			  form_url: '<%= new_user_booking_path(@user) %>',
@@ -26,7 +26,7 @@
             title: "<%= event_title(User.find book[:client_id]) %>",
             start:new Date("<%= rb_to_js(book[:from]) %>"),
             end: new Date("<%= rb_to_js(book[:to]) %>"), 
-            <% if user_signed_in? && current_user.id == book[:client_id] %>
+            <% if user_signed_in? && current_user.id == book[:client_id] && book[:to] > Time.now  && ( @user.confirm_client? current_user.id )%>
               url: "<%= edit_user_booking_path(@user,book) %>", 
             <% end %>
             allDay: false,
@@ -42,8 +42,22 @@
 	});
 </script>
 <% @title = "Booking #{@user.name} #{@user.lastname}" %>
-<% unless user_signed_in? %>
- <div class="success alert alert-notice">You need to sign in or sign up before booking.</div>
-<% end %>
-<div class="calendar-caption"><%= "#{@user.name} #{@user.lastname}" %></div>
+
+  <% if user_signed_in? %>
+    <% if @user.clients.include? current_user %>
+      <% unless @user.confirm_client? current_user.id %>
+        <div class="success alert alert-notice">User didn't confirm or blocked you!!!</div>
+      <% end %>       
+    <% else %>
+      <%= form_for @relation, url: relationships_path do |f| %>
+        <%= f.hidden_field :user_id %>
+        <%= f.submit "subscribe to", class: "btn btn-primary btn-small" %> 
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="success alert alert-notice">You need to sign in or sign up before booking.</div>	
+  <% end %>
+<div class="calendar-caption">
+  <%= "#{@user.name} #{@user.lastname}" %>
+</div>
 <div id='calendar'></div>
