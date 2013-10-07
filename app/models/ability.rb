@@ -4,19 +4,21 @@ class Ability
   def initialize(user)
     if user
       @user = user
-      admin_rights  if @user.role == "admin"
-      user_rights if @user.role == "user"
-      client_rights if @user.role == "client"
+      #@user.roles.each { |role| send(role) if respond_to? role }
+      admin if @user.role == "admin"
+      employee if @user.role == "employee"
+      client if @user.role == "client"
     else
       not_logged_in
     end	
   end
 
-  def admin_rights
+  def admin
     can :manage, :all
+    can :manage, Relationship
   end
 
-  def client_rights
+  def client
     can :read, :all
     can :create, Booking
     can [:edit, :update, :delete], Booking do |booking|
@@ -24,13 +26,13 @@ class Ability
     end 
   end
 
-  def user_rights
+  def employee
     can :read, :all
     can :create, Booking
     can [:edit, :update, :delete], Booking do |booking|
       booking.client_id ==  @user.id
     end 
-    can :manage, Relationship
+    can [:show, :create, :confirm_client, :block_client], Relationship
   end	
 
   def not_logged_in

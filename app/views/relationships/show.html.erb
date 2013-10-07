@@ -1,16 +1,18 @@
-<% @title= @user.role == "user" ? "My clients" : "My personnel"%>
+<% @title = "My clients" if @user.role == "employee"  
+   @title = "My personnel" if @user.role == "client"
+%>
 <div class="caption"><%= @title%></div>
 <div class="span6">
 <br/>
-<table class='user-list'>
-	  <% list =  @user.role == "user" ? @user.clients : @user.inverse_clients %>
-	  <% list.each do |user| %>
+<table class='user-list'> 
+
+	  <% @list.each do |user| %>
 	    <tr>
 	      <td>
 	        <%= link_to gravatar_for(user), user_path(user) %>
 	        <%= link_to "#{user.name} #{user.lastname}", user_path(user) %>
         </td>
-	      <% if @user.role == "user"  %>
+	      <% if @user.role == "employee"  %>
 	        <td>
 	          <% unless @user.confirm_client? user.id%>
 	            <span class="confirm-client"><%= link_to "confirm", controller: 'relationships', action: 'confirm_client', id: user.id %></span>
@@ -25,3 +27,4 @@
 	    </tr>
 	  <% end %>
 </table>
+<%= will_paginate @list, class: 'digg_pagination' %>

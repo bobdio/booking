@@ -11,6 +11,11 @@ Reservation::Application.routes.draw do
   
   get 'relationships_confirm_client/:id', to: 'relationships#confirm_client'
   get 'relationships_block_client/:id', to: 'relationships#block_client'
+  #get 'clients/', to: 'relationships#clients'
+  #get 'employees/', to: 'relationships#employees'
+  #get 'allusers/', to: 'relationships#index'
+  get 'relations/', to: 'relationships#index'
+
 
   root :to => 'users#index'
 

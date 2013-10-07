@@ -1,0 +1,32 @@
+<div class="container">
+  <div class='span2'>
+  <%= form_tag"/relations", method: "get" do %>
+    <%= label_tag :user_type, "User type:"  %>
+    <%= select_tag :user_type, options_for_select(@user_types_for_select, @user_type),  class: 'selectpicker ' %>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil, class: 'btn btn-info' %>
+  <% end %>
+  </div>
+</div>
+<div class="container"></div>
+<table class='user-list pretty'>
+  <thead>
+    <th></th>
+    <th colspan="3"><span class="sort-link"><%= sortable 'name', 'Ім\'я' %></span><span class="sort-link"><%= sortable 'lastname', 'Прізвище' %></span></th>
+  </thead>
+	  <% @users.each do |user| %>
+	    <tr>
+	      <th><%= link_to gravatar_for(user), user_path(user) %></th>
+	      <td><%= link_to "#{user.name}", user_path(user) %> <%= link_to "#{user.lastname}", user_path(user) %></td>
+        <td></td> 
+	    </tr>
+	  <% end %>
+</table>
+<%= will_paginate @users, class: 'digg_pagination' %>
+<script>
+  $('.selectpicker').selectpicker({
+    style: 'btn-info'
+  });
+</script
