@@ -1,0 +1,12 @@
+<% @title = "Edit user" %>
+<div class="span4">
+  <div class="caption"><%= @title %></div>
+  <%= form_for(@user) do |f| %>
+    
+    <%= render 'shared/error_messages', obj: f.object %>
+    
+    <%= render 'fields', f: f %>
+
+    <%= f.submit "Save changes", class: "btn btn-large btn-primary" %> 
+  <% end %> 
+</div>
